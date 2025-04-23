@@ -15,7 +15,7 @@ Automatize o atendimento via **WhatsApp** com um assistente inteligente baseado 
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/neo-web.git
+   git clone https://github.com/manassesCahunda/neo-web.git
    cd neo-web
    ```
 
