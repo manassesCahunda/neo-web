@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { Calendar, Tag, User, DollarSign, FileText, Briefcase, Hash } from "lucide-react"
-import type { Appointment } from "./view"
+import type { Appointment } from "./page"
 
 interface DetalhesAgendamentoProps {
   appointment: Appointment | null
@@ -16,7 +16,6 @@ interface DetalhesAgendamentoProps {
 export function DetalhesAgendamento({ appointment, aberto, setAberto }: DetalhesAgendamentoProps) {
   if (!appointment) return null
 
-  // Função para obter a cor do status
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "confirmado":
@@ -30,20 +29,19 @@ export function DetalhesAgendamento({ appointment, aberto, setAberto }: Detalhes
     }
   }
 
-  // Função para formatar data e hora
+  
   const formatarDataHora = (dataHora: string) => {
     const data = new Date(dataHora)
     return format(data, "dd 'de' MMMM 'de' yyyy 'às' HH:mm", { locale: ptBR })
   }
 
-  // Função para formatar valor monetário
   const formatarValor = (valor: string) => {
     return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(Number(valor))
   }
 
   return (
-    <Sheet open={aberto} onOpenChange={setAberto}>
-      <SheetContent className="sm:max-w-md">
+    <Sheet  open={aberto} onOpenChange={setAberto}  >
+      <SheetContent className="sm:max-w-md bg-white text-black">
         <SheetHeader>
           <SheetTitle className="text-xl">{appointment.name}</SheetTitle>
         </SheetHeader>
