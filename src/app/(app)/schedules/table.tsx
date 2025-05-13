@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { CalendarIcon, Search } from "lucide-react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import type { Appointment } from "./view"
+import type { Appointment } from "./page"
 
 interface TabelaAgendamentosProps {
   appointments: Appointment[]
