@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { Calendar, Tag, User, DollarSign, FileText, Briefcase, Hash } from "lucide-react"
-import type { Appointment } from "./agendamentos-view"
+import type { Appointment } from "./view"
 
 interface DetalhesAgendamentoProps {
   appointment: Appointment | null
