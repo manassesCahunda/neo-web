@@ -82,7 +82,7 @@ export function CalendarioAgendamentos({
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-6">
-      <Card>
+      <Card className="h-[calc(100vh-12rem)]">
         <CardHeader>
           <div className="relative mb-4">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -94,7 +94,7 @@ export function CalendarioAgendamentos({
             />
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="h-[calc(100%-6rem)] flex flex-col">
           <Calendar
             mode="single"
             selected={dataSelecionada}
@@ -110,7 +110,7 @@ export function CalendarioAgendamentos({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="h-[calc(100vh-12rem)]">
         <CardHeader>
           <CardTitle>
             {dataSelecionada ? (
@@ -123,9 +123,9 @@ export function CalendarioAgendamentos({
             )}
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="h-[calc(100%-5rem)]">
           {agendamentosDoDia.length > 0 ? (
-            <ScrollArea className="h-[400px]">
+            <ScrollArea className="h-full">
               <div className="space-y-4">
                 {agendamentosDoDia
                   .sort((a, b) => a.datetime_start.localeCompare(b.datetime_start))
