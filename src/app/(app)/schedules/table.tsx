@@ -92,7 +92,7 @@ export function TabelaAgendamentos({
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              <Calendar mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
+              <Calendar    className=" bg-white text-black"  mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
             </PopoverContent>
           </Popover>
 
@@ -106,7 +106,7 @@ export function TabelaAgendamentos({
         <div className="rounded-md border flex-1 flex flex-col overflow-hidden">
           <div className="overflow-auto">
             <Table>
-              <TableHeader className="sticky top-0 bg-background z-10">
+              <TableHeader className="sticky top-0  bg-white text-black z-10">
                 <TableRow>
                   <TableHead>Data/Hora</TableHead>
                   <TableHead>Título</TableHead>
