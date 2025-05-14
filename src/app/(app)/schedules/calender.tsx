@@ -96,6 +96,7 @@ export function CalendarioAgendamentos({
         </CardHeader>
         <CardContent className="h-[calc(100%-6rem)] flex flex-col">
           <Calendar
+            className=" bg-white text-black"
             mode="single"
             selected={dataSelecionada}
             onSelect={handleDataSelecionada}
