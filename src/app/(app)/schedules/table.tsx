@@ -66,8 +66,8 @@ export function TabelaAgendamentos({
   }
 
   return (
-    <Card>
-      <CardContent className="p-6">
+    <Card className="h-[calc(100vh-12rem)]">
+      <CardContent className="p-6 h-full flex flex-col">
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="relative flex-1">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -92,7 +92,7 @@ export function TabelaAgendamentos({
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              <Calendar className="bg-white text-black" mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
+              <Calendar mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
             </PopoverContent>
           </Popover>
 
@@ -103,50 +103,52 @@ export function TabelaAgendamentos({
           )}
         </div>
 
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Data/Hora</TableHead>
-                <TableHead>Título</TableHead>
-                <TableHead className="hidden md:table-cell">Cliente</TableHead>
-                <TableHead className="hidden md:table-cell">Profissional</TableHead>
-                <TableHead className="hidden md:table-cell">Categoria</TableHead>
-                <TableHead className="hidden lg:table-cell">Valor</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {appointments.length > 0 ? (
-                appointments.map((appointment) => (
-                  <TableRow
-                    key={appointment.id}
-                    className="cursor-pointer hover:bg-muted/80"
-                    onClick={() => abrirDetalhes(appointment)}
-                  >
-                    <TableCell>{formatarDataHora(appointment.datetime_start)}</TableCell>
-                    <TableCell className="font-medium">{appointment.name}</TableCell>
-                    <TableCell className="hidden md:table-cell">{appointment.client_name}</TableCell>
-                    <TableCell className="hidden md:table-cell">{appointment.user_name}</TableCell>
-                    <TableCell className="hidden md:table-cell">{appointment.category}</TableCell>
-                    <TableCell className="hidden lg:table-cell">{formatarValor(appointment.value)}</TableCell>
-                    <TableCell>
-                      <Badge className={getStatusColor(appointment.appointment_status)} variant="outline">
-                        {appointment.appointment_status.charAt(0).toUpperCase() +
-                          appointment.appointment_status.slice(1)}
-                      </Badge>
+        <div className="rounded-md border flex-1 flex flex-col overflow-hidden">
+          <div className="overflow-auto">
+            <Table>
+              <TableHeader className="sticky top-0 bg-background z-10">
+                <TableRow>
+                  <TableHead>Data/Hora</TableHead>
+                  <TableHead>Título</TableHead>
+                  <TableHead className="hidden md:table-cell">Cliente</TableHead>
+                  <TableHead className="hidden md:table-cell">Profissional</TableHead>
+                  <TableHead className="hidden md:table-cell">Categoria</TableHead>
+                  <TableHead className="hidden lg:table-cell">Valor</TableHead>
+                  <TableHead>Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {appointments.length > 0 ? (
+                  appointments.map((appointment) => (
+                    <TableRow
+                      key={appointment.id}
+                      className="cursor-pointer hover:bg-muted/80"
+                      onClick={() => abrirDetalhes(appointment)}
+                    >
+                      <TableCell>{formatarDataHora(appointment.datetime_start)}</TableCell>
+                      <TableCell className="font-medium">{appointment.name}</TableCell>
+                      <TableCell className="hidden md:table-cell">{appointment.client_name}</TableCell>
+                      <TableCell className="hidden md:table-cell">{appointment.user_name}</TableCell>
+                      <TableCell className="hidden md:table-cell">{appointment.category}</TableCell>
+                      <TableCell className="hidden lg:table-cell">{formatarValor(appointment.value)}</TableCell>
+                      <TableCell>
+                        <Badge className={getStatusColor(appointment.appointment_status)} variant="outline">
+                          {appointment.appointment_status.charAt(0).toUpperCase() +
+                            appointment.appointment_status.slice(1)}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={7} className="h-24 text-center">
+                      Nenhum agendamento encontrado.
                     </TableCell>
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center">
-                    Nenhum agendamento encontrado.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </div>
 
         <div className="text-sm text-muted-foreground mt-4">Total de agendamentos: {appointments.length}</div>
