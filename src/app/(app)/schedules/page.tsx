@@ -6,6 +6,8 @@ import { CalendarioAgendamentos } from "./calender"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DetalhesAgendamento } from "./details"
 import { Calendar, LayoutList } from "lucide-react"
+import  { select } from "@/action/appointment/select"
+
 
 
 export interface Appointment {
@@ -154,6 +156,7 @@ export default function  AgendamentosView() {
   useEffect(() => {
     async function load() {
       const { message } = await select()
+      console.log(select);
       setAppointments(Array.isArray(message) ? message : [])
     }
     load()
