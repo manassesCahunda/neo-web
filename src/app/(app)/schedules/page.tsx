@@ -69,7 +69,8 @@ export default function  AgendamentosView() {
   }
 
   return (
-    <>
+    <div className="container mx-auto py-4 h-[calc(100vh-2rem)]">
+      <h1 className="text-3xl font-bold mb-4">Sistema de Agendamentos</h1>
       <Tabs defaultValue="tabela" className="w-full">
         <div className="flex justify-between items-center mb-6">
           <TabsList>
@@ -108,6 +109,6 @@ export default function  AgendamentosView() {
       </Tabs>
 
       <DetalhesAgendamento appointment={agendamentoSelecionado} aberto={sheetAberto} setAberto={setSheetAberto} />
-    </>
+    </div>
   )
 }
