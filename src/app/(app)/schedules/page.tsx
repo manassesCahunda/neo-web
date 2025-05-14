@@ -36,7 +36,8 @@ export default function  AgendamentosView() {
 
   useEffect(() => {
     async function load() {
-      const { message } = await select()
+      const { message } = await select();
+      console.log(message);
       setAppointments(Array.isArray(message) ? message : [])
     }
     load()
