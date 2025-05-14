@@ -92,7 +92,7 @@ export function TabelaAgendamentos({
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              <Calendar mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
+              <Calendar className="bg-white text-black" mode="single" selected={dataFiltro} onSelect={setDataFiltro} initialFocus />
             </PopoverContent>
           </Popover>
 
