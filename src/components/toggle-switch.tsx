@@ -32,7 +32,7 @@ export function ToggleSwitch({ defaultValue = false, onChange, className, disabl
       onClick={handleToggle}
       className={cn(
         "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        isChecked ? "bg-primary" : "bg-input",
+        isChecked ? "bg-black" : "bg-slate-300",
         disabled && "opacity-50 cursor-not-allowed",
         className,
       )}
