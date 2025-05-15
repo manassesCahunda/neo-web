@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Conversation } from "@/type/chat"
 import { Label } from "@/components/ui/label"
 import { ToggleSwitch } from "@/components/toggle-switch"
@@ -13,9 +13,10 @@ interface ChatHeaderProps {
 
 export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
   const [switchValue, setSwitchValue] = useState(conversation.status)
+  useEffect(() => {
+    setSwitchValue(conversation.status)
+  }, [conversation.status])
 
-  console.log(switchValue);
-  
   const handleToggle = (value: boolean) => {
     setSwitchValue(value)
     onButton(value)
