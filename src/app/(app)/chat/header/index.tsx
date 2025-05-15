@@ -14,11 +14,6 @@ interface ChatHeaderProps {
 export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
   const [switchValue, setSwitchValue] = useState(conversation.status)
 
-  const handleStatusChange = (checked: boolean) => {
-    setStatus(checked)
-    onButton(checked)
-  }
-
   return (
     <div className="border-b border-gray-200 p-4 flex items-center justify-between">
       <div className="flex items-center">
@@ -37,7 +32,7 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
       <div className="flex items-center space-x-2">
         <div className="flex items-center gap-4">
            <span className="text-sm font-medium">Estado do Assistente: </span>
-          <ToggleSwitch defaultValue={false} onChange={handleStatusChange} />
+           <ToggleSwitch defaultValue={false} onChange={onButton} />
         </div>
       </div>
     </div>
