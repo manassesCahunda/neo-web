@@ -1,27 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface ToggleSwitchProps {
-  defaultValue?: boolean
+  value: boolean
   onChange?: (checked: boolean) => void
   className?: string
-  disabled?: boolean
 }
 
-export function ToggleSwitch({ defaultValue , onChange, className}: ToggleSwitchProps) {
-  const [isChecked, setIsChecked] = useState(defaultValue)
-
-  useEffect(() => {
-    setIsChecked(defaultValue)
-  }, [defaultValue])
-
+export function ToggleSwitch({
+  value,
+  onChange,
+  className,
+}: ToggleSwitchProps) {
   const handleToggle = () => {
-    const newValue = !isChecked
-    setIsChecked(newValue)
-    onChange?.(newValue)
+    onChange?.(!value)
   }
 
   return (
@@ -30,10 +24,10 @@ export function ToggleSwitch({ defaultValue , onChange, className}: ToggleSwitch
       onClick={handleToggle}
       className={cn(
         "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        isChecked ? "bg-black" : "bg-slate-300",
+        value ? "bg-black" : "bg-slate-300",
         className,
       )}
-      aria-checked={isChecked}
+      aria-checked={value}
     >
       <motion.span
         className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg"
@@ -44,8 +38,8 @@ export function ToggleSwitch({ defaultValue , onChange, className}: ToggleSwitch
           damping: 30,
         }}
         style={{
-          marginLeft: isChecked ? "auto" : "2px",
-          marginRight: isChecked ? "2px" : "auto",
+          marginLeft: value ? "auto" : "2px",
+          marginRight: value ? "2px" : "auto",
         }}
       />
     </motion.button>
