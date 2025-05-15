@@ -183,6 +183,11 @@ export function useChat() {
   const activeMessage = useCallback((status: boolean) => {
     if (!selectedConversationId) return;
   
+     setConversations((prev) =>
+       prev.map((conv) =>
+         conv.id === selectedConversationId ? { ...conv, status } : conv
+       )
+     )
 
     sendWebSocketMessage({
       type: "active",
