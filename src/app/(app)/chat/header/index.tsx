@@ -1,14 +1,23 @@
+"use client"
+
 import Image from "next/image"
+import { useState } from "react"
 import type { Conversation } from "@/type/chat"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 
 interface ChatHeaderProps {
   conversation: Conversation
-  onButton: (status: boolean) => void 
+  onButton: (status: boolean) => void
 }
 
 export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
+  const [status, setStatus] = useState(conversation.status)
+  const handleStatusChange = (checked: boolean) => {
+    setStatus(checked)
+    onButton(checked)
+  }
+
   return (
     <div className="border-b border-gray-200 p-4 flex items-center justify-between">
       <div className="flex items-center">
@@ -25,8 +34,8 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
         </div>
       </div>
       <div className="flex items-center space-x-2">
-        <Switch checked={conversation.status} onCheckedChange={onButton} id="status-switch" />
-        <Label htmlFor="status-switch">Estado do Assistente {conversation.status ? "ativo" : "inativo"}</Label>
+        <Switch checked={status} onCheckedChange={handleStatusChange} id="status-switch" />
+        <Label htmlFor="status-switch">Estado do Assistente {status ? "ativo" : "inativo"}</Label>
       </div>
     </div>
   )
