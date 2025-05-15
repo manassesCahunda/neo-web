@@ -11,7 +11,7 @@ interface ToggleSwitchProps {
   disabled?: boolean
 }
 
-export function ToggleSwitch({ defaultValue = false, onChange, className, disabled = false }: ToggleSwitchProps) {
+export function ToggleSwitch({ defaultValue , onChange, className}: ToggleSwitchProps) {
   const [isChecked, setIsChecked] = useState(defaultValue)
 
   useEffect(() => {
@@ -37,11 +37,9 @@ export function ToggleSwitch({ defaultValue = false, onChange, className, disabl
         className,
       )}
       aria-checked={isChecked}
-      disabled={disabled}
-      whileTap={{ scale: disabled ? 1 : 0.95 }}
     >
       <motion.span
-        className="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg"
+        className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg"
         layout
         transition={{
           type: "spring",
