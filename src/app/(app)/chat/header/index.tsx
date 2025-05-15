@@ -1,8 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import type { Conversation } from "@/type/chat"
+import { Label } from "@/components/ui/label"
 import { ToggleSwitch } from "@/components/toggle-switch"
 
 interface ChatHeaderProps {
@@ -13,19 +14,12 @@ interface ChatHeaderProps {
 export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
   const [switchValue, setSwitchValue] = useState(conversation.status)
 
-  // Atualiza o valor inicial caso conversation.status mude
+  // 🔧 Sincronizar o estado com conversation.status sempre que ele mudar
   useEffect(() => {
     setSwitchValue(conversation.status)
   }, [conversation.status])
 
-  // Atualiza a cada 2 segundos verificando conversation.status
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSwitchValue(conversation.status)
-    }, 2000)
-
-    return () => clearInterval(interval) // limpar quando desmontar
-  }, [conversation.status])
+  console.log("switchValue:", switchValue)
 
   const handleToggle = (value: boolean) => {
     setSwitchValue(value)
