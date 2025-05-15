@@ -41,7 +41,7 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
           <span className="text-sm font-medium">
             Estado do Assistente: {switchValue ? "Ativo" : "Inativo"}
           </span>
-          <ToggleSwitch defaultValue={switchValue} onChange={handleToggle} />
+          <ToggleSwitch value={switchValue} onChange={handleToggle} />
         </div>
       </div>
     </div>
