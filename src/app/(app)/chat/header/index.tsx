@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import type { Conversation } from "@/type/chat"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+import { ToggleSwitch } from "@/components/toggle-switch"
 
 interface ChatHeaderProps {
   conversation: Conversation
@@ -12,7 +12,8 @@ interface ChatHeaderProps {
 }
 
 export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
-  const [status, setStatus] = useState(conversation.status)
+  const [switchValue, setSwitchValue] = useState(conversation.status)
+
   const handleStatusChange = (checked: boolean) => {
     setStatus(checked)
     onButton(checked)
@@ -34,8 +35,10 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
         </div>
       </div>
       <div className="flex items-center space-x-2">
-        <Switch checked={status} onCheckedChange={handleStatusChange} id="status-switch" />
-        <Label htmlFor="status-switch">Estado do Assistente {status ? "ativo" : "inativo"}</Label>
+        <div className="flex items-center gap-4">
+           <span className="text-sm font-medium">Estado do Assistente: </span>
+          <ToggleSwitch defaultValue={false} onChange={handleStatusChange} />
+        </div>
       </div>
     </div>
   )
