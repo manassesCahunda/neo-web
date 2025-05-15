@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import type { Conversation, Message, ServerMessage, TypingStatus } from "@/type/chat"
@@ -188,7 +188,6 @@ export function useChat() {
         conv.id === selectedConversationId
           ? {
               ...conv,
-              status, 
             }
           : conv
       )
