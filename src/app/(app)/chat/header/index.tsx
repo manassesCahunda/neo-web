@@ -1,7 +1,7 @@
 import Image from "next/image"
 import type { Conversation } from "@/type/chat"
 import { Label } from "@/components/ui/label"
-import { CustomSwitch } from "@/components/switch"
+import { Switch } from "@/components/ui/switch"
 
 interface ChatHeaderProps {
   conversation: Conversation
@@ -25,14 +25,8 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
         </div>
       </div>
       <div className="flex items-center space-x-2">
-        <CustomSwitch
-          id="airplane-mode"
-          checked={conversation.status}  
-          onCheckedChange={(checked) => onButton(checked)} 
-          className="hover:opacity-90"
-          thumbClassName="hover:scale-105"
-        />
-        <Label htmlFor="airplane-mode">Estado do Assistente</Label>
+        <Switch checked={conversation.status} onCheckedChange={onButton} id="status-switch" />
+        <Label htmlFor="status-switch">Estado do Assistente {conversation.status ? "ativo" : "inativo"}</Label>
       </div>
     </div>
   )
