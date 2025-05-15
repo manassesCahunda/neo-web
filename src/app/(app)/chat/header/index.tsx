@@ -32,7 +32,7 @@ export const ChatHeader = ({ conversation, onButton }: ChatHeaderProps) => {
       <div className="flex items-center space-x-2">
         <div className="flex items-center gap-4">
            <span className="text-sm font-medium">Estado do Assistente: {switchValue} </span>
-           <ToggleSwitch defaultValue={false} onChange={onButton} />
+           <ToggleSwitch defaultValue={switchValue} onChange={onButton} />
         </div>
       </div>
     </div>
