@@ -27,10 +27,10 @@ export async function GET(req: NextRequest) {
 
   const cookieToken = serialize('token', token, cookieOptions);
 
-  response.headers.append('Set-Cookie', cookieToken);
   
   const response = NextResponse.redirect(redirectUrl);
 
+  response.headers.append('Set-Cookie', cookieToken);
 
   return response;
 }
