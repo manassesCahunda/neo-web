@@ -23,11 +23,16 @@ export async function GET(req: NextRequest) {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, 
+    maxAge: 60 * 60 * 24 * 7,
   };
+
+  // ⚠️ Só um será efetivamente enviado corretamente
   const cookieNeo = serialize('neo_', 'neo_', cookieOptions);
   const cookieToken = serialize('token', token, cookieOptions);
-  response.headers.set('Set-Cookie', [cookieNeo, cookieToken].join(', '));
+
+  // ⚠️ Este vai sobrescrever o anterior (portanto só 1 é enviado corretamente)
+  response.headers.set('Set-Cookie', cookieNeo);
+  response.headers.set('Set-Cookie', cookieToken); // este sobrescreve o de cima
 
   return response;
 }
