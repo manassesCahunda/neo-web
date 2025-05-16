@@ -16,7 +16,6 @@ export async function GET(req: NextRequest) {
   }
 
   const redirectUrl = process.env.WEB ? `${process.env.WEB}/chat` : '/';
-  const response = NextResponse.redirect(redirectUrl);
 
   const cookieOptions = {
     httpOnly: true,
@@ -33,5 +32,7 @@ export async function GET(req: NextRequest) {
   response.headers.set('Set-Cookie', cookieNeo);
   response.headers.set('Set-Cookie', cookieToken); 
 
-  return response;
+  
+
+   return NextResponse.redirect(redirectUrl);
 }
