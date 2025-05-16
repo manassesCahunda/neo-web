@@ -30,7 +30,6 @@ export async function GET(req: NextRequest) {
 
   const response = NextResponse.redirect(redirectUrl);
 
-  // Sempre substitui, então usa append para múltiplos cookies
   response.headers.append('Set-Cookie', cookieNeo);
   response.headers.append('Set-Cookie', cookieToken);
 
