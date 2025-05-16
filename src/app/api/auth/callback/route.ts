@@ -26,13 +26,12 @@ export async function GET(req: NextRequest) {
     maxAge: 60 * 60 * 24 * 7,
   };
 
-  // ⚠️ Só um será efetivamente enviado corretamente
   const cookieNeo = serialize('neo_', 'neo_', cookieOptions);
   const cookieToken = serialize('token', token, cookieOptions);
 
-  // ⚠️ Este vai sobrescrever o anterior (portanto só 1 é enviado corretamente)
+
   response.headers.set('Set-Cookie', cookieNeo);
-  response.headers.set('Set-Cookie', cookieToken); // este sobrescreve o de cima
+  response.headers.set('Set-Cookie', cookieToken); 
 
   return response;
 }
