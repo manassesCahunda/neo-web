@@ -25,7 +25,6 @@ export async function GET(req: NextRequest) {
     path: '/',
     maxAge: 60 * 60 * 24 * 7, 
   };
-
   const cookieNeo = serialize('neo_', 'neo_', cookieOptions);
   const cookieToken = serialize('token', token, cookieOptions);
   response.headers.set('Set-Cookie', [cookieNeo, cookieToken].join(', '));
