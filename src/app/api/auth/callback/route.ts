@@ -28,11 +28,11 @@ export async function GET(req: NextRequest) {
   const cookieNeo = serialize('neo_', 'neo_', cookieOptions);
   const cookieToken = serialize('token', token, cookieOptions);
 
+  const response = NextResponse.redirect(redirectUrl);
 
-  response.headers.set('Set-Cookie', cookieNeo);
-  response.headers.set('Set-Cookie', cookieToken); 
+  // Sempre substitui, então usa append para múltiplos cookies
+  response.headers.append('Set-Cookie', cookieNeo);
+  response.headers.append('Set-Cookie', cookieToken);
 
-  
-
-   return NextResponse.redirect(redirectUrl);
+  return response;
 }
