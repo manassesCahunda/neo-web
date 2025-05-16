@@ -18,8 +18,6 @@ export async function GET(req: NextRequest) {
   const redirectUrl = process.env.WEB ? `${process.env.WEB}/chat` : '/';
 
   const cookieOptions = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     path: '/',
     maxAge: 60 * 60 * 24 * 7,
