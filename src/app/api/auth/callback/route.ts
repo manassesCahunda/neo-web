@@ -25,13 +25,12 @@ export async function GET(req: NextRequest) {
     maxAge: 60 * 60 * 24 * 7,
   };
 
-  const cookieNeo = serialize('neo_', 'neo_', cookieOptions);
   const cookieToken = serialize('token', token, cookieOptions);
 
+  response.headers.append('Set-Cookie', cookieToken);
+  
   const response = NextResponse.redirect(redirectUrl);
 
-  response.headers.append('Set-Cookie', cookieNeo);
-  response.headers.append('Set-Cookie', cookieToken);
 
   return response;
 }
