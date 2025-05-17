@@ -11,13 +11,12 @@ export async function GET(req: NextRequest) {
 
   const redirectUrl = process.env.WEB ? `${process.env.WEB}/chat` : '/';
 
-  response.cookies.set({
-    name: 'token',
-    value: token,
+  const cookieStore = await  cookies();
+  
+  cookieStore.set('token', token, {
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7 dias
-    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 7 
   });
 
-  return response;
+  return NextResponse.redirect(redirectUrl);
 }
