@@ -1,27 +1,51 @@
-import { NextRequest } from "next/server"
-import { jwtVerify, decodeJwt } from "jose"
-import { parse, serialize } from "cookie"
+import { NextRequest } from "next/server";
+import { jwtVerify, decodeJwt } from "jose";
+import { parse } from "cookie";
+import { SessionUser } from "@/type/type";
 
-const JWT_SECRET = process.env.JWT_SECRET!
-import { SessionUser } from "@/type/type"
+const JWT_SECRET = process.env.JWT_SECRET!;
 
-export async function sessionStore({req,tokenCookie}:{req?: NextRequest | undefined, tokenCookie?: string}): Promise<SessionUser | null> {
-  const cookies = parse(req?.headers.get('cookie') || "")
-  const token = cookies.token ||tokenCookie;
-  if (!token) return null
-
+export async function sessionStore({
+  req,
+  tokenCookie,
+}: {
+  req?: NextRequest;
+  tokenCookie?: string;
+}): Promise<SessionUser | null> {
   try {
-    const decodedToken = decodeJwt(token ) as { exp: number }
-    const currentTime = Math.floor(Date.now() / 1000)
+    const cookies = parse(req?.headers.get("cookie") || "");
+    const token = tokenCookie || cookies.token;
 
-    if (decodedToken.exp < currentTime) {
-      console.log("TOKEN IS EXPIRED.")
-      return null
+
+    if (!token || typeof token !== "string" || token.split(".").length !== 3) {
+      console.warn("Token ausente ou malformado.");
+      return null;
     }
-    const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET))
-    return payload.user as SessionUser
+
+
+    const decodedToken = decodeJwt(token) as { exp?: number };
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (!decodedToken.exp || decodedToken.exp < currentTime) {
+      console.warn("Token expirado.");
+      return null;
+    }
+
+  
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
+
+    if (!payload.user) {
+      console.warn("Token sem payload de usuário.");
+      return null;
+    }
+
+    return payload.user as SessionUser;
   } catch (err) {
-    console.error("TOKEN IS INVALID OR EXPIRED:", err)
-    return null
+    if (err) {
+      console.error("TOKEN IS INVALID:", err?.message);
+    } else {
+      console.error("Erro ao verificar token:", err);
+    }
+    return null;
   }
 }
