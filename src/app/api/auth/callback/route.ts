@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   const cookieStore = await  cookies();
   
-  cookieStore.set('token', token, {
+  cookieStore.set('token', "binga", {
     path: '/',
     maxAge: 60 * 60 * 24 * 7 
   });
