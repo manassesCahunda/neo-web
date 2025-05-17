@@ -9,14 +9,21 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'TOKEN is required' }, { status: 400 });
   }
 
-  const redirectUrl = process.env.WEB ? `${process.env.WEB}/chat` : '/';
+  const redirectUrl = process.env.WEB
+    ? `${process.env.WEB}/chat`
+    : new URL('/chat', req.url).toString();
 
-  const cookieStore = await  cookies();
-  
-  cookieStore.set('token', "binga", {
+  const cookieStore = await cookies(); 
+
+  console.log(token.length)
+
+  cookieStore.set('token', token, {
     path: '/',
-    maxAge: 60 * 60 * 24 * 7 
+    httpOnly: false,
+    secure: false,
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 7,
   });
-
+  
   return NextResponse.redirect(redirectUrl);
 }
