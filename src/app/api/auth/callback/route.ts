@@ -11,8 +11,6 @@ export async function GET(req: NextRequest) {
 
   const redirectUrl = process.env.WEB ? `${process.env.WEB}/chat` : '/';
 
-  const response = NextResponse.redirect(redirectUrl);
-  
   response.cookies.set({
     name: 'token',
     value: token,
