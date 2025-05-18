@@ -31,13 +31,3 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
-
-  
-//   return NextResponse.json(
-//     { message: 'Token set successfully' },
-//     {
-//       status: 200,
-//       headers: {
-//         'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`,
-//       }} )
-// }
