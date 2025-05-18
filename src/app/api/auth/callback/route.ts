@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -8,14 +9,27 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'TOKEN is required' }, { status: 400 });
   }
 
-  const response = NextResponse.json({ success: true });
+  // const redirectUrl = process.env.WEB
+  //   ? `${process.env.WEB}/chat`
+  //   : new URL('/chat', req.url).toString();
 
-  response.cookies.set('token', token, {
+  const cookieStore = await cookies(); 
+
+  console.log(token.length)
+
+  cookieStore.set('token', token, {
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7 dias
-    httpOnly: false, // ⚠️ Agora o cookie é visível em document.cooki
+    httpOnly: false,
+    secure: false,
     sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 7,
   });
-
-  return response;
+  
+  return NextResponse.json(
+    { message: 'Token set successfully' },
+    {
+      status: 200,
+      headers: {
+        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`,
+      }} )
 }
