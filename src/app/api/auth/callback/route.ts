@@ -9,27 +9,34 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'TOKEN is required' }, { status: 400 });
   }
 
-  // const redirectUrl = process.env.WEB
-  //   ? `${process.env.WEB}/chat`
-  //   : new URL('/chat', req.url).toString();
+  const redirectUrl = process.env.WEB
+    ? `${process.env.WEB}/chat`
+    : new URL('/chat', req.url).toString();
 
-  const cookieStore = await cookies(); 
+  const cookieStore = cookies();
 
-  console.log(token.length)
+  console.log(`Token length: ${token.length}`);
 
   cookieStore.set('token', token, {
     path: '/',
-    httpOnly: false,
-    secure: false,
+    httpOnly: true,  // Melhor prática: true para segurança
+    secure: true,    // true para HTTPS
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60 * 24 * 7, // 7 dias
   });
-  
+
   return NextResponse.json(
-    { message: 'Token set successfully' },
-    {
-      status: 200,
-      headers: {
-        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`,
-      }} )
+    { message: 'Token set successfully', redirectUrl },
+    { status: 200 }
+  );
 }
+
+  
+//   return NextResponse.json(
+//     { message: 'Token set successfully' },
+//     {
+//       status: 200,
+//       headers: {
+//         'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800`,
+//       }} )
+// }
