@@ -12,7 +12,7 @@ export async function select() {
   if (!token) return;
 
   const user = await sessionStore({ tokenCookie: token });
-  const userId = user?.id;
+  const userId = user;
 
   try {
     const response = await Axios.get(`${process.env.URL_SERVER}/user/${userId}`, {
