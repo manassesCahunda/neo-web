@@ -26,8 +26,5 @@ export async function GET(req: NextRequest) {
   });
   
 
-  return NextResponse.json(
-    { message: 'Token set successfully', redirectUrl },
-    { status: 200 }
-  );
+ return NextResponse.redirect(redirectUrl, 302);
 }
