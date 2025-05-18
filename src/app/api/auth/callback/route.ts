@@ -19,11 +19,12 @@ export async function GET(req: NextRequest) {
 
   cookieStore.set('token', token, {
     path: '/',
-    httpOnly: true,  // Melhor prática: true para segurança
-    secure: true,    // true para HTTPS
+    httpOnly: false,
+    secure: false,
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 dias
+    maxAge: 60 * 60 * 24 * 7,
   });
+  
 
   return NextResponse.json(
     { message: 'Token set successfully', redirectUrl },
