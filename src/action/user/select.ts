@@ -29,7 +29,7 @@ export async function select() {
     if (error.response) {
       console.error('Detalhes da resposta:', error.response.data);
         cookieStore.delete('token');
-        console.log('Token removido devido a falha de autenticação');
+        console.log('Token removido devido a falha de autenticação',user);
       }
     }
 
