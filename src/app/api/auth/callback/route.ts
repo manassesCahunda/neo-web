@@ -9,9 +9,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'TOKEN is required' }, { status: 400 });
   }
 
-  const redirectUrl = process.env.WEB
-    ? `${process.env.WEB}/chat`
-    : new URL('/chat', req.url).toString();
+  // const redirectUrl = process.env.WEB
+  //   ? `${process.env.WEB}/chat`
+  //   : new URL('/chat', req.url).toString();
 
   const cookieStore = await cookies(); 
 
@@ -22,5 +22,5 @@ export async function GET(req: NextRequest) {
     maxAge: 60 * 60 * 24 * 7,
   });
   
-  return NextResponse.redirect(redirectUrl);
+  return NextResponse.json({});
 }
