@@ -18,7 +18,7 @@ export async function sessionStore({
 
 
     if (!token || typeof token !== "string" || token.split(".").length !== 3) {
-      console.warn("Token ausente ou malformado.");
+      console.warn("Token ausente ou malformado.",token);
       return null;
     }
 
