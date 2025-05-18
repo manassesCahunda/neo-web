@@ -14,6 +14,8 @@ export async function select() {
   const user = await sessionStore({ tokenCookie: token });
   const userId = user;
 
+  console.log(userId);
+  
   try {
     const response = await Axios.get(`${process.env.URL_SERVER}/user/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
