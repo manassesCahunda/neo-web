@@ -12,7 +12,7 @@ export async function select() {
   if (!token) return;
 
   const user = await sessionStore({ tokenCookie: token });
-  const userId = user;
+  const userId = user?.id;
 
   console.log(userId);
   
